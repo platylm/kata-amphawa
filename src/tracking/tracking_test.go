@@ -1,6 +1,10 @@
 package tracking
 
-import "testing"
+import (
+	"io/ioutil"
+	"strings"
+	"testing"
+)
 
 func Test_Tracking_Input_Expenditure_Should_Be_185_Dot_71(t *testing.T) {
 	expectedExpenditure := 185.71
@@ -20,6 +24,20 @@ func Test_Tracking_Input_Expenditure_Should_Be_185_Dot_71(t *testing.T) {
 	input = append(input, rows5)
 	input = append(input, rows6)
 	input = append(input, rows7)
+
+	actual := Tracking(input)
+
+	if expectedExpenditure != actual {
+		t.Errorf("expected %v but got it %v", expectedExpenditure, actual)
+	}
+}
+
+func Test_Tracking_Input_Expenditure_Should_Be_185_Dot_711(t *testing.T) {
+	var input [][]string
+	expectedExpenditure := 185.71
+	file, _ := ioutil.ReadFile("inputdata.txt")
+	inputDay := string(file)
+	input = strings.Split(inputDay, "\n")
 
 	actual := Tracking(input)
 
